@@ -46,5 +46,20 @@ namespace TripLog.Views
             };
             trips.ItemsSource = items;
         }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewEntryPage());
+        }
+
+        private void trips_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var trip = (TripLogEntry)e.CurrentSelection.FirstOrDefault();
+            if(trip != null)
+            {
+                Navigation.PushAsync(new DetailPage(trip));
+            }
+            trips.SelectedItem = null;
+        }
     }
 }
